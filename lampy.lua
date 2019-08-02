@@ -8,5 +8,6 @@ while true do
       component.redstone.setOutput(sides.west, 15)
     else component.redstone.setOutput(sides.west, 0)
     end
+  os.sleep(5)
 end
 
