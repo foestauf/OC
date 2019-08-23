@@ -3,6 +3,7 @@ local component = require("component")
 local term = require("term")
 local sides = require("sides")
 local colors = require("colors")
+local redstone = require("redstone")
 while true do
     local lightlevel = component.redstone.getbundledInput(sides.west,colors.pink)
     term.write(lightlevel)
