@@ -24,8 +24,8 @@ function updateRain(x)
 	local startX = w/5
 	local startY = h/5
 	term.setCursor(startX,startY)
-	-- term.clearLine()
-	-- term.setCusor(startX,startY)
+	term.clearLine()
+	term.setCursor(startX,startY)
 	io.write("Is it raining?: ")
 	gpu.setForeground(0xFF0000) -- Red
 	io.write(x)
@@ -36,10 +36,10 @@ function lights()
     lightlevel = redstone.getBundledInput(sides.east,colors.pink)
 	raining = redstone.getBundledInput(sides.east,colors.cyan)
     if lightlevel < 150 then
-      redstone.setBundledOutput(sides.east,colors.white, 255)
-	elseif raining > 100 then
-	redstone.setBundledOutput(sides.east,colors.white, 255)
-    else redstone.setBundledOutput(sides.east,colors.white, 0)
+        redstone.setBundledOutput(sides.east,colors.white, 255)
+	    elseif raining > 100 then
+	    redstone.setBundledOutput(sides.east,colors.white, 255)
+        else redstone.setBundledOutput(sides.east,colors.white, 0)
     end
 end
 
