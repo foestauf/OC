@@ -7,7 +7,7 @@ local redstone = component.redstone
 w, h = component.gpu.getResolution()
 
 function status()
-	-- term.clear()
+	term.clear()
 	local rain = " "
 	-- gpu.setBackground(0xB9B9B9) -- Gray Background
 	gpu.fill(1,1,w,h, " ")
@@ -16,10 +16,6 @@ function status()
 	if raining > 100 then rain = "Yes"
         else rain = "No"
 	end
-	io.write("Is it raining?: ")
-	gpu.setForeground(0xFF0000) -- Red
-	io.write(rain)
-	gpu.setForeground(0xFFFFFF) -- White
 	-- drawButton(25,25,"Goof")
 	updateRain(rain)
 end
@@ -28,9 +24,12 @@ function updateRain(x)
 	local startX = w/5
 	local startY = h/5
 	term.setCursor(startX,startY)
-	term.clearLine()
+	-- term.clearLine()
 	-- term.setCusor(startX,startY)
-	io.write("New Rain Status Yo: ", x)
+	io.write("Is it raining?: ")
+	gpu.setForeground(0xFF0000) -- Red
+	io.write(x)
+	gpu.setForeground(0xFFFFFF) -- White
 end
 
 function lights()
