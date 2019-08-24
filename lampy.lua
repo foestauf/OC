@@ -7,6 +7,9 @@ local gpu = component.gpu
 
 local function status(x,y)
     term.clear()
+	local w, h = gpu.getResolution()
+	gpu.setBackground(0x316E1F) -- Green Background
+	gpu.fill(1,1,w,h, " ")
 	io.write("Current light level: ",x, "\n")
 	if y > 100 then y = "Yes"
         else y = "No"
