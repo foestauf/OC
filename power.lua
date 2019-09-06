@@ -45,10 +45,10 @@ end
 function energyfull()	
 	energy = currentEnergy()
 	local maxenergy = fusion.getMaxEnergyStored()
-	overenergy = 0.75*maxenergy
+	almostFull = 0.75*maxenergy
 	energyStatus = false
 	
-	if energy > overenergy then
+	if energy > almostFull  then
 		io.write("Current Power Storage = ", energy)
 		energyStatus = false
 		fusion.deactivate()
