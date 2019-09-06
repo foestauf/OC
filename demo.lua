@@ -1,4 +1,3 @@
-THIS IS MY EXAMPLEwwwwwwwwwwwwwwwwwwwwwwwwwwww
 
 333333333333333333333333333333333
 ggggggggg
