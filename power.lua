@@ -33,8 +33,8 @@ function overheat()
 	if currentTemp > overtemp then
 		io.write("Overheating: Current Temp = ", temp)
 		overheatStatus = true
-		return overheatStatus
 		fusion.deactivate()
+		return overheatStatus
 	else
 		overheatStatus = false
 		return overheatStatus
@@ -49,8 +49,8 @@ function energyfull()
 	if currentTemp > overenergy then
 		io.write("Current Power Storagy = ", energy)
 		overheatStatus = false
-		return energyStatus
 		fusion.deactivate()
+		return energyStatus	
 	else
 		energyStatus = false
 		return energyStatus
