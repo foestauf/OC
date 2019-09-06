@@ -57,9 +57,13 @@ function energyfull()
 	
 end	
 
-if overheat() == false then io.write("I am overheated")
-else
-io.write("I am not overheated")
+function start()
+if buildInfo() == true and overheat() == false and energyfull() == false then
+fusion.activate()
+elseif overheat() == true then io.write("Overheat Condition")
+elseif energyfull() == true then io.write("Internal Buffer Full")
+elseif buildInfo() == false then io.write("Not built properly?")
+end
 end
 	
 	
