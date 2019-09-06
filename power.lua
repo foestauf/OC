@@ -18,13 +18,13 @@ function buildInfo()
 	end
 end
 
---[[function currentTemp()
+function currentTemp()
 	return fusion.getTemperature()
 end
 	
 function currentEnergy()
 	return fusion.getEnergyStored()
-end]]--
+end
 
 --[[function overheat()
 	temp = currentTemp()
