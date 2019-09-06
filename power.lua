@@ -49,7 +49,7 @@ function energyfull()
 	energyStatus = false
 	
 	if energy > overenergy then
-		io.write("Current Power Storagy = ", energy)
+		io.write("Current Power Storage = ", energy)
 		energyStatus = false
 		fusion.deactivate()
 	end
