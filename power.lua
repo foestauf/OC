@@ -25,7 +25,7 @@ function currentEnergy()
 	return fusion.getEnergyStored()
 end
 
-function overheat()
+--[[function overheat()
 	temp = currentTemp()
 	local maxtemp = fusion.getMaxTemperature()
 	overtemp = 0.75*maxtemp
@@ -55,7 +55,7 @@ function energyfull()
 	
 	return energyStatus	
 	
-end	
+end	--]]
 		
 	
 	
