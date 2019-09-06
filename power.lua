@@ -1,6 +1,5 @@
 local component = require("component")
 local fusion = component.nc_fusion_reactor
-local complete = fusion.isComplete()
 local gpu = component.gpu
 
 function buildStatus()
@@ -10,6 +9,7 @@ end
 
 function buildInfo()
 	bool = buildStatus()
+	
 	if bool == true then
 		fusion.activate()
 	else
@@ -27,9 +27,10 @@ end
 
 function overheat()
 	temp = currentTemp()
-	maxtemp = fusion.getMaxTemperature()
+	local maxtemp = fusion.getMaxTemperature()
 	overtemp = 0.75*maxtemp
 	overheatStatus = false
+	
 	if currentTemp > overtemp then
 		io.write("Overheating: Current Temp = ", temp)
 		overheatStatus = true
@@ -37,14 +38,17 @@ function overheat()
 	else
 		overheatStatus = false	
 	end
+	
 	return overheatStatus
+	
 end
 		
 function energyfull()	
 	energy = currentEnergy()
-	maxenergy = fusion.getMaxEnergyStored()
+	local maxenergy = fusion.getMaxEnergyStored()
 	overenergy = 0.75*maxenergy
 	energyStatus = false
+	
 	if currentTemp > overenergy then
 		io.write("Current Power Storagy = ", energy)
 		overheatStatus = false
@@ -52,7 +56,9 @@ function energyfull()
 	else
 		energyStatus = false
 	end
+	
 	return energyStatus	
+	
 end	
 		
 	
