@@ -3,8 +3,7 @@ local fusion = component.nc_fusion_reactor
 local gpu = component.gpu
 
 function buildStatus()
-	local complete = fusion.isComplete()
-	return complete
+	return fusion.isComplete()
 end
 
 function buildInfo()
