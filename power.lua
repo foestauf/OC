@@ -15,6 +15,7 @@ function buildInfo()
 	else
 		why = fusion.getProblem()
 		io.write("I am not complete because ", why)
+	end
 end
 
 function currentTemp()
