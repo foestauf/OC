@@ -1,2 +1,0 @@
-# OC
-Open Computers
