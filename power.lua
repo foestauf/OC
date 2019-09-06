@@ -2,19 +2,10 @@ local component = require("component")
 local fusion = component.nc_fusion_reactor
 local gpu = component.gpu
 
+
+-- Status Functions
 function buildStatus()
 	return fusion.isComplete()
-end
-
-function buildInfo()
-	bool = buildStatus()
-	
-	if bool == true then
-		fusion.activate()
-	else
-		why = fusion.getProblem()
-		io.write("I am not complete because ", why)
-	end
 end
 
 function currentTemp()
@@ -24,6 +15,19 @@ end
 function currentEnergy()
 	return fusion.getEnergyStored()
 end
+
+-- Check Current Status --
+function buildInfo()
+	bool = buildStatus()
+	
+	if bool == true then
+		why = fusion.getProblem()
+		io.write("I am not complete because ", why)
+	end
+	
+	return bool
+end
+
 
 function overheat()
 	temp = currentTemp()
