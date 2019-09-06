@@ -57,7 +57,11 @@ function energyfull()
 	return energyStatus	
 	
 end	
-		
+
+if overheat() == false then io.write("I am overheated")
+else
+io.write("I am not overheated")
+end
 	
 	
 -- AM I COMPLETE
