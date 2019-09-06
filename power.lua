@@ -49,11 +49,10 @@ function energyfull()
 		io.write("Current Power Storagy = ", energy)
 		overheatStatus = false
 		fusion.deactivate()
-		return energyStatus	
 	else
 		energyStatus = false
-		return energyStatus
 	end
+	return energyStatus	
 end	
 		
 	
