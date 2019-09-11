@@ -5,6 +5,9 @@ local running = true
 local term = require("term")
 local energy = 0
 local status = Normal
+local startX = 1
+local startY = 1
+
 
 -- Status Functions
 function buildStatus()
@@ -19,11 +22,23 @@ function currentEnergy()
 	return fusion.getEnergyStored()
 end
 
-local function normalStatus()
-	term.clear()
-	io.write("TCRM Reactor Status\n")
-	-- io.write("Status")
-	io.write("\n Current Energy Level: ", energy)
+function printEnergy()
+	local width, height = gpu.getResolution()
+	term.setCursor(startX + 1, startY + 4)
+	term.clearLine()
+	term.setCursor(startX + 1, startY + 4)
+	io.write("Current RF/t: ", math.floor(fusion.getReactorProcessPower()))
+	term.setCursor(startX + 1, startY + 2)
+	term.clearLine()
+	term.setCursor(startX + 1, startY + 2)
+	io.write("Current Energy Level: ", energy)
+end
+
+function printTemp()
+	local width, height = gpu.getResolution()
+	term.setCursor(startX + 1, startY + 3)
+	term.clearLine()
+	term.setCursor(startX + 1, startY + 3)
 	if temp > 1000000 then
 		temp = temp/1000000
 		tempMeas = "MK"
@@ -31,13 +46,27 @@ local function normalStatus()
 		temp = temp/1000
 		tempMeas = "kK"
 	end
-	io.write("\n Temperature: ", math.floor(temp))
-	io.write("\n Current RF/t: ", math.floor(fusion.getReactorProcessPower()))
+	io.write("Temperature: ", math.floor(temp))
 	io.write(tempMeas)
-	local efficiency = fusion.getEfficiency()
-	efficiency = math.floor(efficiency)
-	io.write("\n Current Efficiency: ", efficiency, "%")
 end
+
+local function printEfficiency()
+	local width, height = gpu.getResolution()
+	term.setCursor(startX + 1, startY + 1)
+	term.clearLine()
+	term.setCursor(startX + 1, startY + 1)
+	io.write("Current Efficiency: ", math.floor(fusion.getEfficiency()), "%")
+end
+
+local function normalStatus()
+	io.write("TCRM Reactor Status\n")
+	-- io.write("Status")
+	printTemp()
+	printEnergy()
+	printEfficiency()
+end
+
+-- Energy Full State
 
 -- Check Current Status --
 function buildInfo()
@@ -55,16 +84,18 @@ end
 function safety()
 	overheat()
 	energyfull()
-	io.write("\n Safeguardian Enabled\n")
-	if energyStatus == true then
-		term.write("\nInternal buffer is full\n")
-		os.sleep(10)
+	while energyStatus == true do
+		local width, height = gpu.getResolution()
 		energyfull()
+		printEnergy()
+		term.setCursor(width/5 + 1, startY + 4)
+		term.write("Internal buffer is full\n")
+		os.sleep(10)
 		if energyStatus == false then
 		restart()
 		end
 	end
-	if overheat == true then
+	while overheat == true do
 		io.write("OVERHEATED!")
 		os.sleep(10)
 		overheat()
@@ -105,7 +136,6 @@ function energyfull()
 	energyStatus = false	
 	
 	if energy > almostFull  then
-		-- io.write("Current Power Storage = ", energy)
 		energyStatus = true
 		fusion.deactivate()
 	end
