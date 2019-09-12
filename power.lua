@@ -8,7 +8,6 @@ local status = Normal
 local startX = 1
 local startY = 1
 
-
 -- Status Functions
 function buildStatus()
 	return fusion.isComplete()
@@ -184,11 +183,10 @@ while running do
 end
 
 -- AM I COMPLETE
-
+-- HELLO WORLD
 -- YES/NO WHY NOT
 
 -- CAN I START?
-
 
 -- WHAT IS ENERGY CHANGE RATE
 
