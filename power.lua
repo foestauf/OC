@@ -17,7 +17,7 @@ end
 function currentTemp()
 	return fusion.getTemperature()
 end
-	
+
 function currentEnergy()
 	return fusion.getEnergyStored()
 end
@@ -59,7 +59,7 @@ local function printEfficiency()
 end
 
 local function normalStatus()
-	io.write("TCRM Reactor Status\n")
+	io.write("TCRM Reactor Status:\n")
 	-- io.write("Status")
 	printTemp()
 	printEnergy()
@@ -71,12 +71,12 @@ end
 -- Check Current Status --
 function buildInfo()
 	bool = buildStatus()
-	
+
 	if bool == false then
 		why = fusion.getProblem()
 		exit_msg(why)
 	end
-	
+
 	return bool
 end
 
@@ -118,31 +118,32 @@ function overheat()
 	local maxtemp = fusion.getMaxTemperature()
 	overtemp = 0.75*maxtemp
 	overheatStatus = false
-	
+
 	if temp > overtemp then
 		io.write("Overheating: Current Temp = ", temp)
 		overheatStatus = true
 		fusion.deactivate()
 	end
-	
+
 	return overheatStatus
-	
+
 end
-		
-function energyfull()	
+
+-- AM I FULL ON POWER
+function energyfull()
 	energy = currentEnergy()
 	local maxenergy = fusion.getMaxEnergyStored()
 	almostFull = 0.75*maxenergy
-	energyStatus = false	
-	
+	energyStatus = false
+
 	if energy > almostFull  then
 		energyStatus = true
 		fusion.deactivate()
 	end
-	
-	return energyStatus	
-	
-end	
+
+	return energyStatus
+
+end
 
 function start()
 	if buildInfo() == true and overheat() == false and energyfull() == false then
@@ -152,14 +153,14 @@ function start()
 		term.clear()
 		io.write("Overheat Condition")
 	elseif energyfull() == true then
-		term.clear()	
+		term.clear()
 		io.write("Internal Buffer Full")
 	elseif buildInfo() == false then
-		term.clear()	
+		term.clear()
 		io.write("Not built properly?")
 	end
 end
-	
+
 
 -- Exit Message
 function exit_msg(msg)
@@ -188,9 +189,6 @@ end
 
 -- CAN I START?
 
--- turn on/turn off
-
--- HOW BIG AM I
 
 -- WHAT IS ENERGY CHANGE RATE
 
@@ -203,6 +201,3 @@ end
 -- HOW MUCH POWER
 
 -- AM I OVERHEATED
-
--- AM I FULL ON POWER
-
