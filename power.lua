@@ -9,17 +9,6 @@ local startX = 1
 local startY = 1
 
 -- Status Functions
-function buildStatus()
-	return fusion.isComplete()
-end
-
-function currentTemp()
-	return fusion.getTemperature()
-end
-
-function currentEnergy()
-	return fusion.getEnergyStored()
-end
 
 function printEnergy()
 	local width, height = gpu.getResolution()
@@ -59,7 +48,6 @@ end
 
 local function normalStatus()
 	io.write("TCRM Reactor Status:\n")
-	-- io.write("Status")
 	printTemp()
 	printEnergy()
 	printEfficiency()
@@ -72,7 +60,7 @@ function buildInfo()
 	bool = buildStatus()
 
 	if bool == false then
-		why = fusion.getProblem()
+		local why = fusion.getProblem()
 		exit_msg(why)
 	end
 
@@ -95,9 +83,12 @@ function safety()
 		end
 	end
 	while overheat == true do
+		local width, height = gpu.getResolution()
+		overheat()
+		printTemp()
+		tern,setCursor(width/5 + 1, startY + 3)
 		io.write("OVERHEATED!")
 		os.sleep(10)
-		overheat()
 		if overheatStatus == false then
 			restart()
 		end
@@ -112,6 +103,7 @@ function restart()
 	end
 end
 
+-- AM I OVERHEATED
 function overheat()
 	temp = currentTemp()
 	local maxtemp = fusion.getMaxTemperature()
@@ -182,20 +174,9 @@ while running do
 	os.sleep(1)
 end
 
--- AM I COMPLETE
--- HELLO WORLD
--- YES/NO WHY NOT
-
--- CAN I START?
 
 -- WHAT IS ENERGY CHANGE RATE
 
 -- WHAT IS COOLING RATE
 
--- WHAT IS MY EFFICIENCY
-
 -- BASED ON FUEL what is deal temperature vs max temperature
-
--- HOW MUCH POWER
-
--- AM I OVERHEATED
